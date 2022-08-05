@@ -1,4 +1,4 @@
-# GCP Cloud SQL
+# Terraform GCP Cloud SQL
 
 A reference project to provision a Google Cloud Platform Cloud SQL database with public IP address
 
@@ -33,10 +33,16 @@ terraform destroy # destroys GCP stack
 
 ## Connect to Cloud SQL
 
-- Connect to Cloud SQL to view database tables:
+- Connect to Cloud SQL using `psql`:
 
 ```bash
 psql postgresql://postgresql-database-user:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/react-serverless-gcp-database
+```
+
+- Connect to Cloud SQL using [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy):
+
+```bash
+psql -h localhost -d goose -U postgresql-database-user
 ```
 
 ## Contributing

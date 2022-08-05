@@ -3,7 +3,7 @@ resource "random_id" "db_name_suffix" {
 }
 
 resource "google_sql_database_instance" "db_instance" {
-  name = "${var.project_name}-db-${random_id.db_name_suffix.hex}"
+  name   = "${var.project_name}-db-${random_id.db_name_suffix.hex}"
   region = var.region
 
   /*
@@ -51,7 +51,7 @@ resource "google_sql_database" "db" {
 
 data "google_secret_manager_secret_version" "postgresql_database_password" {
   provider = google-beta
-  secret   = var.goose-postgresql-database-password
+  secret   = var.database_password_secret_name
 }
 
 resource "google_sql_user" "postgresql_database_user" {
