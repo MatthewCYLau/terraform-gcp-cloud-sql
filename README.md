@@ -10,15 +10,6 @@ A reference project to provision a Google Cloud Platform Cloud SQL database with
 terraform -help # prints Terraform options
 ```
 
-## Configurations
-
-- Populate the variables in `terraform.tfvars`
-
-```bash
-project                = <GCP-PROJECT-ID>
-# and other variables
-```
-
 - Create a secret on [Secret Manager](https://cloud.google.com/secret-manager) for Cloud SQL database password
 
 ## Deploy
@@ -36,13 +27,13 @@ terraform destroy # destroys GCP stack
 - Connect to Cloud SQL using `psql`:
 
 ```bash
-psql postgresql://postgresql-database-user:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/react-serverless-gcp-database
+psql postgresql://goose:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/geese
 ```
 
 - Connect to Cloud SQL using [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy):
 
 ```bash
-psql -h localhost -d goose -U postgresql-database-user
+psql -h localhost -d geese -U goose
 ```
 
 ## Contributing

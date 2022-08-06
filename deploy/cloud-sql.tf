@@ -45,7 +45,7 @@ resource "google_sql_database_instance" "db_instance" {
 }
 
 resource "google_sql_database" "db" {
-  name     = "goose"
+  name     = "geese"
   instance = google_sql_database_instance.db_instance.id
 }
 
@@ -55,7 +55,7 @@ data "google_secret_manager_secret_version" "postgresql_database_password" {
 }
 
 resource "google_sql_user" "postgresql_database_user" {
-  name     = "postgresql-database-user"
+  name     = "goose"
   instance = google_sql_database_instance.db_instance.id
   password = data.google_secret_manager_secret_version.postgresql_database_password.secret_data
 }
