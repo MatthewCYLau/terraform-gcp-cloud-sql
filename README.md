@@ -33,7 +33,19 @@ psql postgresql://goose:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/geese
 - Connect to Cloud SQL using [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy):
 
 ```bash
+# cd <location-to-cloud_sql_proxy>
+./cloud_sql_proxy -instances=<INSTANCE_CONNECTION_NAME>=tcp:5432
 psql -h localhost -d geese -U goose
+```
+
+## Create a table
+
+```
+CREATE TABLE goose (
+  id INT NOT NULL PRIMARY KEY,
+  name VARCHAR(255),
+  aggression INT DEFAULT 0
+);
 ```
 
 ## Contributing
