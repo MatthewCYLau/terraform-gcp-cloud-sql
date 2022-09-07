@@ -33,9 +33,17 @@ psql postgresql://goose:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/geese
 - Connect to Cloud SQL using [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy):
 
 ```bash
-# cd <location-to-cloud_sql_proxy>
-./cloud_sql_proxy -instances=<INSTANCE_CONNECTION_NAME>=tcp:5432
+# cd <location-to-cloud-sql-proxy>
+./cloud-sql-proxy <INSTANCE_CONNECTION_NAME>
 psql -h localhost -d geese -U goose
+```
+
+- Connect to Cloud SQL using _and_ automatic IAM database authentication:
+
+```bash
+# cd <location-to-cloud-sql-proxy>
+./cloud-sql-proxy <INSTANCE_CONNECTION_NAME> -i -c <LOCATION-TO-DB-USER-SERVICE-ACCOUNT-JSON>
+psql "dbname=geese host=127.0.0.1 user=db-iam-user@<project-id>.iam"
 ```
 
 ## Create a table

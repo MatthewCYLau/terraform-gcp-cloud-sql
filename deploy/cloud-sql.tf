@@ -38,6 +38,11 @@ resource "google_sql_database_instance" "db_instance" {
         value = "0.0.0.0/0"
       }
     }
+
+    database_flags {
+      name  = "cloudsql.iam_authentication"
+      value = "on"
+    }
   }
 
   database_version    = "POSTGRES_13"
@@ -58,4 +63,10 @@ resource "google_sql_user" "postgresql_database_user" {
   name     = "goose"
   instance = google_sql_database_instance.db_instance.id
   password = data.google_secret_manager_secret_version.postgresql_database_password.secret_data
+}
+
+resource "google_sql_user" "db_iam_user" {
+  name     = split(".gserviceaccount.com", google_service_account.cloud_sql_instance_user.email)[0]
+  instance = google_sql_database_instance.db_instance.id
+  type     = "CLOUD_IAM_SERVICE_ACCOUNT"
 }
