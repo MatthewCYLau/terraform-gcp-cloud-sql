@@ -10,8 +10,6 @@ A reference project to provision a Google Cloud Platform Cloud SQL database with
 terraform -help # prints Terraform options
 ```
 
-- Create a secret on [Secret Manager](https://cloud.google.com/secret-manager) for Cloud SQL database password
-
 ## Deploy
 
 ```bash
@@ -27,7 +25,8 @@ terraform destroy # destroys GCP stack
 - Connect to Cloud SQL using `psql`:
 
 ```bash
-psql postgresql://goose:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/geese
+psql postgresql://app:<PASSWORD>@<CLOUD-SQL-IP>:5432/ecommerce
+psql postgresql://app:<PASSWORD>@<CLOUD-SQL-IP>:5432/ecommerce -f sql/seed.sql # create seed data
 ```
 
 - Connect to Cloud SQL using [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy):
@@ -35,7 +34,7 @@ psql postgresql://goose:<DB-PASSWORD>@<CLOUD-SQL-IP>:5432/geese
 ```bash
 # cd <location-to-cloud-sql-proxy>
 ./cloud-sql-proxy <INSTANCE_CONNECTION_NAME>
-psql -h localhost -d geese -U goose
+psql -h localhost -d ecommerce -U app
 ```
 
 - Connect to Cloud SQL using _and_ automatic IAM database authentication:
@@ -43,16 +42,20 @@ psql -h localhost -d geese -U goose
 ```bash
 # cd <location-to-cloud-sql-proxy>
 ./cloud-sql-proxy <INSTANCE_CONNECTION_NAME> -i -c <LOCATION-TO-DB-USER-SERVICE-ACCOUNT-JSON>
-psql "dbname=geese host=127.0.0.1 user=db-iam-user@<project-id>.iam"
+psql "dbname=ecommerce host=127.0.0.1 user=db-iam-user@<project-id>.iam"
 ```
 
 ## Create a table
 
 ```
-CREATE TABLE goose (
-  id INT NOT NULL PRIMARY KEY,
-  name VARCHAR(255),
-  aggression INT DEFAULT 0
+CREATE TABLE users(
+  id SERIAL NOT NULL PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE orders(
+    id SERIAL NOT NULL PRIMARY KEY,
+    user_id INT NOT NULL references users(id)
 );
 ```
 

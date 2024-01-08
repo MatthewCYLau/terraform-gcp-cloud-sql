@@ -1,6 +1,2 @@
-project                       = "open-source-apps-001"
-project_name                  = "gcp-cloud-sql"
-region                        = "europe-west2"
-zone                          = "europe-west2-a"
-database_password_secret_name = "goose-postgresql-database-password"
-environment                   = "production"
+region  = "us-east1"
+project = "playground-s-11-4710de98"

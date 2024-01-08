@@ -2,27 +2,12 @@ variable "project" {
   description = "GCP project ID"
 }
 
-variable "project_name" {
-  type        = string
-  description = "Project name"
-}
-
 variable "region" {
   description = "GCP region"
 }
 
-variable "zone" {
-  description = "GCP zone"
-}
-
-variable "database_password_secret_name" {
-  description = "Cloud SQL PostgreSQL database password secret name"
-}
-
-variable "environment" {
-  description = "Name of the environment."
-  type        = string
-  default     = "dev"
+variable "sql_user_password" {
+  description = "Cloud SQL user, its password"
 }
 
 variable "resource_tags" {
