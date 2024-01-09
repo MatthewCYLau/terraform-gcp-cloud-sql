@@ -25,8 +25,8 @@ terraform destroy # destroys GCP stack
 - Connect to Cloud SQL using `psql`:
 
 ```bash
-psql postgresql://app:<PASSWORD>@<CLOUD-SQL-IP>:5432/ecommerce
-psql postgresql://app:<PASSWORD>@<CLOUD-SQL-IP>:5432/ecommerce -f sql/seed.sql # create seed data
+psql postgresql://app-user:<PASSWORD>@<CLOUD-SQL-IP>:5432/ecommerce
+psql postgresql://app-user:<PASSWORD>@<CLOUD-SQL-IP>:5432/ecommerce -f sql/seed.sql # create seed data
 ```
 
 - Connect to Cloud SQL using [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-instance-auth-proxy):

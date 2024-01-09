@@ -55,7 +55,7 @@ resource "google_sql_database" "ecommerce" {
 }
 
 resource "google_sql_user" "app" {
-  name     = "app"
+  name     = "app-user"
   instance = google_sql_database_instance.this.id
   password = var.sql_user_password
 }
