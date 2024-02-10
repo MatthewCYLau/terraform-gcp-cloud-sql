@@ -20,6 +20,8 @@ CREATE TABLE orders(
     product_id INT NOT NULL references products(id)
 );
 
+CREATE INDEX idx_users_email ON users(email);
+
 INSERT INTO users (name, email, date_of_birth) VALUES ('Paul', '1@2.com', '1990-06-12');
 INSERT INTO users (name, email, date_of_birth) VALUES ('Mary', '2@2.com', '1991-07-22');
 INSERT INTO products (name) VALUES ('Apple');
