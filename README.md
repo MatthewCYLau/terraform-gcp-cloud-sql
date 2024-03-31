@@ -59,6 +59,13 @@ CREATE TABLE orders(
 );
 ```
 
+## Connect to loca PostgreSQL
+
+```bash
+psql postgresql://db_user:password@localhost:5432/ecommerce
+psql postgresql://db_user:password@localhost:5432/ecommerce -f sql/seed.sql # create seed data
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
